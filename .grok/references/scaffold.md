@@ -15,6 +15,12 @@ import { routeTree } from "./routeTree.gen"; // generated on first dev/build
 export function getRouter() {
   return createRouter({ routeTree, defaultErrorComponent: AppErrorComponent });
 }
+
+declare module "@tanstack/react-router" {
+  interface Register {
+    router: ReturnType<typeof getRouter>;
+  }
+}
 ```
 
 ```tsx
