@@ -24,6 +24,7 @@ import { CommandPalette } from "./command-palette";
 import { QuickRefBody } from "./quick-ref";
 import { StepArticle } from "./step-article";
 import { Button } from "./ui/button";
+import { DeveloperInfo } from "./developer-info";
 import {
   Dialog,
   DialogContent,
@@ -249,6 +250,9 @@ export function GuideApp({
                   <dd className="font-mono text-lg tabular-nums">{TOTAL_MINUTES} মি</dd>
                 </div>
               </dl>
+              <div className="mt-8">
+                <DeveloperInfo />
+              </div>
             </section>
           ) : (
             <div className="mb-6 flex flex-wrap items-center gap-2 text-xs text-faint">
