@@ -1,0 +1,190 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Noto Sans Bengali", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Noto Serif Bengali", "Noto Sans Bengali", Georgia, ui-serif, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-raised: var(--raised);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+  --color-ok: var(--ok);
+  --color-ok-fg: var(--ok-fg);
+  --color-ok-soft: var(--ok-soft);
+  --color-warn: var(--warn);
+  --color-warn-fg: var(--warn-fg);
+  --color-warn-soft: var(--warn-soft);
+  --color-code: var(--code);
+  --color-code-fg: var(--code-fg);
+  --color-code-muted: var(--code-muted);
+  --color-ring: var(--ring);
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  --shadow-border: var(--elev-border);
+  --shadow-border-hover: var(--elev-border-hover);
+
+  --spacing-header: 3.75rem;
+  --scale-25: 0.25;
+}
+
+@layer base {
+  :root,
+  html[data-theme="light"] {
+    --canvas: #f2efe8;
+    --surface: #faf8f3;
+    --raised: #ffffff;
+    --ink: #1c2128;
+    --muted: #5c6570;
+    --faint: #8b9289;
+    --line: color-mix(in oklab, #1c2128 12%, transparent);
+    --accent: #1f3d6e;
+    --accent-fg: #f7f4ee;
+    --accent-soft: color-mix(in oklab, #1f3d6e 10%, transparent);
+    --ok: #1b6b4a;
+    --ok-fg: #f4fbf7;
+    --ok-soft: color-mix(in oklab, #1b6b4a 12%, transparent);
+    --warn: #9a4420;
+    --warn-fg: #fdf6f1;
+    --warn-soft: color-mix(in oklab, #9a4420 12%, transparent);
+    --code: #171c26;
+    --code-fg: #dce4dc;
+    --code-muted: #8fa094;
+    --ring: color-mix(in oklab, #1f3d6e 40%, transparent);
+    --elev-border:
+      0 0 0 1px rgba(28, 33, 40, 0.07),
+      0 1px 2px -1px rgba(28, 33, 40, 0.06),
+      0 2px 8px -2px rgba(28, 33, 40, 0.04);
+    --elev-border-hover:
+      0 0 0 1px rgba(28, 33, 40, 0.12),
+      0 1px 3px -1px rgba(28, 33, 40, 0.08),
+      0 6px 16px -6px rgba(28, 33, 40, 0.08);
+    color-scheme: light;
+  }
+
+  html[data-theme="dark"] {
+    --canvas: #0c1017;
+    --surface: #141a24;
+    --raised: #1b2330;
+    --ink: #ece8e0;
+    --muted: #9aa3b0;
+    --faint: #6e7784;
+    --line: color-mix(in oklab, #ece8e0 12%, transparent);
+    --accent: #c9d0db;
+    --accent-fg: #0c1017;
+    --accent-soft: color-mix(in oklab, #c9d0db 12%, transparent);
+    --ok: #6dba96;
+    --ok-fg: #0c1017;
+    --ok-soft: color-mix(in oklab, #6dba96 14%, transparent);
+    --warn: #e0a07a;
+    --warn-fg: #0c1017;
+    --warn-soft: color-mix(in oklab, #e0a07a 14%, transparent);
+    --code: #0a0e14;
+    --code-fg: #dce4dc;
+    --code-muted: #8fa094;
+    --ring: color-mix(in oklab, #c9d0db 45%, transparent);
+    --elev-border: 0 0 0 1px rgba(236, 232, 224, 0.08);
+    --elev-border-hover: 0 0 0 1px rgba(236, 232, 224, 0.14);
+    color-scheme: dark;
+  }
+
+  html {
+    background: var(--canvas);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-fg);
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  code,
+  kbd,
+  pre {
+    font-family: var(--font-mono);
+  }
+}
+
+@layer components {
+  .h-panel {
+    height: calc(100dvh - var(--spacing-header));
+  }
+
+  .max-h-sheet {
+    max-height: min(36rem, calc(100dvh - 4rem));
+  }
+
+  .w-dialog {
+    width: min(40rem, calc(100vw - 1.5rem));
+  }
+
+  .dialog-search {
+    top: 12vh;
+    transform: translate(-50%, 0);
+  }
+
+  [cmdk-group-heading] {
+    padding: 0.4rem 0.5rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+
+  [cmdk-item] {
+    cursor: pointer;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
