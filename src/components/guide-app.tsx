@@ -70,6 +70,7 @@ export function GuideApp({
   const [searchOpen, setSearchOpen] = useState(false);
   const [refOpen, setRefOpen] = useState(false);
   const [resetOpen, setResetOpen] = useState(false);
+  const [devInfoOpen, setDevInfoOpen] = useState(false);
 
   useEffect(() => {
     const unsub = useProgress.persist.onFinishHydration((state) => {
@@ -135,7 +136,16 @@ export function GuideApp({
               </div>
             </div>
           </div>
-          <div className="ml-auto flex items-center gap-1.5">
+          <div className="ml-auto flex items-center gap-2 sm:gap-3">
+            <button
+              onClick={() => setDevInfoOpen(true)}
+              className="relative inline-flex h-8 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-canvas"
+            >
+              <span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#34d399_0%,#3b82f6_33%,#c084fc_66%,#34d399_100%)]" />
+              <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-zinc-950 px-3 py-1 text-xs font-medium tracking-wide text-white backdrop-blur-3xl">
+                DEVELOPER
+              </span>
+            </button>
             <Button variant="ghost" size="sm" onClick={() => setSearchOpen(true)}>
               <Search className="size-4" />
               <span className="hidden sm:inline">সার্চ</span>
@@ -250,9 +260,6 @@ export function GuideApp({
                   <dd className="font-mono text-lg tabular-nums">{TOTAL_MINUTES} মি</dd>
                 </div>
               </dl>
-              <div className="mt-8">
-                <DeveloperInfo />
-              </div>
             </section>
           ) : (
             <div className="mb-6 flex flex-wrap items-center gap-2 text-xs text-faint">
@@ -330,6 +337,13 @@ export function GuideApp({
               মুছে ফেলো
             </Button>
           </div>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={devInfoOpen} onOpenChange={setDevInfoOpen}>
+        <DialogContent className="border-0 bg-transparent p-0 shadow-none sm:max-w-2xl">
+          <DialogTitle className="sr-only">Developer Info</DialogTitle>
+          <DeveloperInfo />
         </DialogContent>
       </Dialog>
     </div>
